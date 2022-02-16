@@ -1,0 +1,11 @@
+#!/bin/ash
+set -e
+
+readonly PID_FILE="/run/dovecot/master.pid"
+
+[[ -e "$PID_FILE" ]] && rm -v "$PID_FILE"
+
+exec /usr/sbin/dovecot -F
+
+# vim: set ft=bash ts=2 sts=2 expandtab:
+
