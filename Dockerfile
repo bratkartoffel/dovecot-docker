@@ -9,5 +9,13 @@ RUN apk upgrade --no-cache \
 # add the custom configurations
 COPY rootfs/ /
 
+# mails should be persistent
+VOLUME /var/mail
+
+# 143: imag
+# 993: imaps
+# 4190: managesieve
+EXPOSE 143/tcp 993/tcp 4190/tcp
+
 CMD [ "/entrypoint.sh" ]
 

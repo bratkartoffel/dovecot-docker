@@ -25,10 +25,12 @@ if [ "$(id -u)" -eq 0 ]; then
   addgroup -g "$APP_GID" "$APP_GROUP"
   adduser -HD -h "$APP_HOME" -s /sbin/nologin -G "$APP_GROUP" -u "$APP_UID" -k /dev/null "$APP_USER"
 
-  echo ">> fixing owner of $APP_HOME, $APP_CONF_DIR"
-  install -dm 0750 -o "$APP_USER" -g "$APP_GROUP" "$APP_HOME"
-  install -dm 0750 -o "$APP_USER" -g "$APP_GROUP" "$APP_CONF_DIR"
-  chown -R "$APP_USER":"$APP_GROUP" "$APP_HOME" "$APP_CONF_DIR" /etc/s6
+  echo ">> fixing permissions"
+  install -dm 0750 -o "$APP_USER" -g "$APP_GROUP" "$APP_HOME" "$APP_CONF_DIR"
+  chown -R "$APP_USER":"$APP_GROUP" \
+          "$APP_HOME" \
+          "$APP_CONF_DIR" \
+          /etc/s6
 
   echo ">> create link for syslog redirection"
   install -dm 0750 -o "$APP_USER" -g "$APP_GROUP" /run/syslogd
