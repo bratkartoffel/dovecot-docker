@@ -4,7 +4,7 @@ FROM alpine:3.19
 RUN apk upgrade --no-cache \
         && apk add --no-cache \
         dovecot dovecot-pigeonhole-plugin dovecot-lmtpd dovecot-pgsql dovecot-fts-solr \
-        s6 setpriv
+        s6 setpriv tzdata
 
 # add the custom configurations
 COPY rootfs/ /
